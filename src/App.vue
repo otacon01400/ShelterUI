@@ -1,21 +1,20 @@
 <template>
-    <v-app>
-        <app-navigation></app-navigation>
-
-        <v-content transition="slide-x-transition">
-            <router-view></router-view>
-        </v-content>
-    </v-app>
+  <v-app class="white">
+    <navbar/>
+    <v-fade-transition mode="out-in">
+      <router-view></router-view>
+    </v-fade-transition>
+  </v-app>
 </template>
 
 <script>
-import AppNavigation from '@/components/AppNavigation';
+import navbar from "@/components/navbar";
 
 export default {
-    name: 'App',
-    components: {
-        AppNavigation
-    }
+  name: "App",
+  components: {
+    navbar
+  }
 };
 </script>
 
