@@ -1,5 +1,5 @@
 <template>
-  <v-app class="white">
+  <v-app>
     <navbar/>
     <v-fade-transition mode="out-in">
       <router-view></router-view>
