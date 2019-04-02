@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
-import FileManager from './views/FileManager.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './views/Home.vue';
+import FileManager from './views/FileManager.vue';
+import Files from './views/Files.vue';
 import TeamManager from './views/TeamManager.vue';
 import Rules from './views/Rules.vue';
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/FileManager',
       name: 'Gestor de Fichas',
       component: FileManager
+    },
+    {
+      path: '/Files',
+      name: 'Visor de Fichas',
+      component: Files
     },
     {
       path: '/TeamManager',

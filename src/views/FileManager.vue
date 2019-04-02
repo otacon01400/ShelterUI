@@ -10,7 +10,15 @@
                   <h3 class="ml-3 font-weight-regular text-no-wrap">{{card.text}}</h3>
                 </v-flex>
                 <v-flex xs4 sm2>
-                  <v-btn fab depressed outline large :color="`${card.color}`">
+                  <v-btn
+                    fab
+                    depressed
+                    outline
+                    large
+                    :color="`${card.color}`"
+                    route
+                    :to="card.route"
+                  >
                     <v-icon>{{card.icon}}</v-icon>
                   </v-btn>
                 </v-flex>
@@ -26,17 +34,21 @@
                       <v-form>
                         <v-text-field
                           single-line
-                          outline
                           autofocus
                           clearable
                           prepend-icon="search"
                           :color="`${card.color}`"
                           class="pt-4 ma-0"
                           v-model="searchInput"
+                          label="Dummy"
+                          required
                         ></v-text-field>
                       </v-form>
                     </div>
                   </v-scroll-x-transition>
+                  <!-- <v-slide-y-transition hide-on-leave>
+                    <v-btn v-show="expand" depressed  outline >Click Me</v-btn>
+                  </v-slide-y-transition>-->
                 </v-flex>
                 <v-flex xs4 sm2>
                   <v-btn
@@ -47,8 +59,18 @@
                     :color="`${card.color}`"
                     @click="expand = !expand"
                   >
-                    <v-icon>{{card.icon}}</v-icon>
+                    <v-fade-transition>
+                      <v-icon v-if="!expand">{{card.icon}}</v-icon>
+                    </v-fade-transition>
+                    <v-fade-transition>
+                      <v-icon v-if="expand">clear</v-icon>
+                    </v-fade-transition>
                   </v-btn>
+                </v-flex>
+                <v-flex xs9 sm9 align-center>
+                  <v-slide-y-transition hide-on-leave>
+                    <v-btn v-show="expand" block outline :color="`${card.color}`">Iniciar Busqueda</v-btn>
+                  </v-slide-y-transition>
                 </v-flex>
               </template>
             </v-layout>
@@ -71,28 +93,31 @@ export default {
           icon: "list",
           color: "#00bcd4",
           class: "borderList",
-          action: ""
+          route: "/Files"
         },
         {
           name: "Search",
           text: "Busqueda: Perro o Patio",
           icon: "search",
           color: "#FF9800",
-          class: "borderSearch"
+          class: "borderSearch",
+          route: "/Files"
         },
         {
           name: "Scan",
           text: "Escaneo de QR",
           icon: "camera_alt",
           color: "#e53935",
-          class: "borderScan"
+          class: "borderScan",
+          route: ""
         },
         {
           name: "Add",
           text: "Crear Nueva Ficha",
           icon: "add",
           color: "#00e676",
-          class: "borderAdd"
+          class: "borderAdd",
+          route: ""
         }
       ],
       searchInput: ""
