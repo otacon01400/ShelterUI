@@ -1,9 +1,9 @@
 <template>
-  <v-app class="white">
-    <navbar/>
-    <v-fade-transition mode="out-in">
+  <v-app>
+    <navbar></navbar>
+    <v-slide-y-transition mode="out-in">
       <router-view></router-view>
-    </v-fade-transition>
+    </v-slide-y-transition>
   </v-app>
 </template>
 
