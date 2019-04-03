@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div>
     <v-navigation-drawer app v-model="drawer" class disable-resize-watcher>
       <v-list class="mt-5">
         <v-list-tile v-for="(link, index) in links" :key="index" router :to="link.route">
@@ -19,7 +19,7 @@
         <v-icon color="grey">more_vert</v-icon>
       </v-btn>
     </v-toolbar>
-  </span>
+  </div>
 </template>
 
 <script>

@@ -93,7 +93,7 @@ export default {
           icon: "list",
           color: "#00bcd4",
           class: "borderList",
-          route: "/Files"
+          route: "/Zones"
         },
         {
           name: "Search",
@@ -101,7 +101,7 @@ export default {
           icon: "search",
           color: "#FF9800",
           class: "borderSearch",
-          route: "/Files"
+          route: "/Zones"
         },
         {
           name: "Scan",

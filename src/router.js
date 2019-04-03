@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import FileManager from './views/FileManager.vue';
-import Files from './views/Files.vue';
+import Zones from './views/Zones.vue';
+import Yards from './views/Yards.vue';
 import TeamManager from './views/TeamManager.vue';
 import Rules from './views/Rules.vue';
 
@@ -22,9 +23,14 @@ export default new Router({
       component: FileManager
     },
     {
-      path: '/Files',
-      name: 'Visor de Fichas',
-      component: Files
+      path: '/Zones',
+      name: 'Zonas',
+      component: Zones
+    },
+    {
+      path: '/Yards',
+      name: 'Patios',
+      component: Yards
     },
     {
       path: '/TeamManager',
