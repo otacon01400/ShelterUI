@@ -10,37 +10,38 @@ import Rules from './views/Rules.vue';
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: [{
-      path: '/',
-      name: 'Inicio',
-      component: Home
-    },
-    {
-      path: '/FileManager',
-      name: 'Gestor de Fichas',
-      component: FileManager
-    },
-    {
-      path: '/Zones',
-      name: 'Zonas',
-      component: Zones
-    },
-    {
-      path: '/Yards',
-      name: 'Patios',
-      component: Yards
-    },
-    {
-      path: '/TeamManager',
-      name: 'Gestor del Equipo',
-      component: TeamManager
-    },
-    {
-      path: '/Rules',
-      name: 'Protocolos',
-      component: Rules
-    },
-  ]
-})
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes: [
+		{
+			path: '/',
+			name: 'Inicio',
+			component: Home
+		},
+		{
+			path: '/fileManager',
+			name: 'Gestor de Fichas',
+			component: FileManager
+		},
+		{
+			path: '/zones',
+			name: 'Zonas',
+			component: Zones
+		},
+		{
+			path: '/zones/:zone',
+			name: 'Patios',
+			component: Yards
+		},
+		{
+			path: '/teamManager',
+			name: 'Gestor del Equipo',
+			component: TeamManager
+		},
+		{
+			path: '/rules',
+			name: 'Protocolos',
+			component: Rules
+		}
+	]
+});

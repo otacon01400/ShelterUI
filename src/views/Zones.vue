@@ -1,12 +1,12 @@
 <template>
   <v-container class="my-5" fill-height>
     <v-layout column class="pt-2">
-      <v-flex v-for="zone in zones" :key="zone.number">
+      <v-flex v-for="zone in zones" :key="zone.id">
         <v-card class="mx-2 my-2">
           <v-card-title>
             <v-layout row wrap>
               <v-layout column>
-                <div class="font-weight-bold">
+                <div class="font-weight-bold mb-1">
                   <div class="caption grey--text">Zona {{zone.id}}</div>
                   {{zone.name}}
                 </div>
@@ -41,36 +41,18 @@
             </v-layout>
           </v-card-title>
           <v-card-action>
-            <v-btn
-              flat
-              color="grey darken-1"
-              @click="selectedZone = zone.number"
-              route
-              :to="'/Yards'"
+            <router-link
+              tag="btn"
+              :to="{ name: 'Patios', params: {zone:zone.name, data: zone.yardsInside}}"
             >
-              <v-icon left>folder</v-icon>Explorar
-            </v-btn>
+              <v-btn flat color="grey darken-1" @click="selectedZone = zone.number">
+                <v-icon left>folder</v-icon>Explorar
+              </v-btn>
+            </router-link>
           </v-card-action>
         </v-card>
       </v-flex>
     </v-layout>
-    <!------------------------------------->
-    <v-slide-x-transition hide-on-leave>
-      <v-layout class="pt-5" v-show="selectedZone">
-        <v-flex>
-          <v-card class="py-3 mx-2">
-            <v-layout row justify-space-around align-center>
-              <v-flex xs4>
-                <div>{{selectedZone}}</div>
-              </v-flex>
-              <v-flex xs2>
-                <v-btn @click="selectedZone = ''">Reset</v-btn>
-              </v-flex>
-            </v-layout>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-slide-x-transition>
   </v-container>
 </template>
 <script>
@@ -108,9 +90,6 @@ const formacion = {
 export default {
   data() {
     return {
-      expand: "false",
-      selectedZone: "",
-
       zones: [
         {
           name: "Periferias Centrales",
@@ -133,6 +112,7 @@ export default {
           yardsInside: [
             {
               name: "Morera",
+
               id: "1",
               dangerLevel: [
                 {
@@ -142,20 +122,20 @@ export default {
                   show: variado.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
             },
             {
               name: "Llaurer",
               id: "2",
               dangerLevel: [
                 {
-                  name: medio.name,
-                  color: medio.color,
-                  voluntareerLevel: medio.voluntareerLevel,
-                  show: medio.show
+                  name: bajo.name,
+                  color: bajo.color,
+                  voluntareerLevel: bajo.voluntareerLevel,
+                  show: bajo.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}, {}, {}, {}]
             },
             {
               name: "Gallinero",
@@ -194,7 +174,7 @@ export default {
                   show: medio.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}]
             },
             {
               name: "Enfermería de Abajo",
@@ -207,7 +187,7 @@ export default {
                   show: medio.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}]
             },
             {
               name: "Cachorros",
@@ -220,7 +200,7 @@ export default {
                   show: formacion.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}]
             },
             {
               name: "G1",
@@ -233,7 +213,7 @@ export default {
                   show: bajo.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}]
             },
             {
               name: "G2",
@@ -246,7 +226,7 @@ export default {
                   show: bajo.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}, {}]
             },
             {
               name: "Delante Recepción",
@@ -259,7 +239,7 @@ export default {
                   show: bajo.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}]
             },
             {
               name: "Bosquet",
@@ -272,7 +252,7 @@ export default {
                   show: medio.show
                 }
               ],
-              dogsInside: [{}]
+              dogsInside: [{}, {}, {}, {}, {}]
             }
           ]
         },
@@ -517,10 +497,10 @@ export default {
               id: "9",
               dangerLevel: [
                 {
-                  name: bajo.name,
-                  color: bajo.color,
-                  voluntareerLevel: bajo.voluntareerLevel,
-                  show: bajo.show
+                  name: alto.name,
+                  color: alto.color,
+                  voluntareerLevel: alto.voluntareerLevel,
+                  show: alto.show
                 }
               ],
               dogsInside: [{}]
@@ -530,10 +510,10 @@ export default {
               id: "10",
               dangerLevel: [
                 {
-                  name: bajo.name,
-                  color: bajo.color,
-                  voluntareerLevel: bajo.voluntareerLevel,
-                  show: bajo.show
+                  name: alto.name,
+                  color: alto.color,
+                  voluntareerLevel: alto.voluntareerLevel,
+                  show: alto.show
                 }
               ],
               dogsInside: [{}]
