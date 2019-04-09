@@ -31,24 +31,20 @@
 
                   <v-scroll-x-transition hide-on-leave class="pt-2">
                     <div v-show="expand" style="white-space: nowrap">
-                      <v-form>
+                      <v-form onSubmit="return false;" ref="form">
                         <v-text-field
-                          single-line
-                          autofocus
+                          class="pt-4 ma-0"
                           clearable
                           prepend-icon="search"
                           :color="`${card.color}`"
-                          class="pt-4 ma-0"
                           v-model="searchInput"
-                          label="Dummy"
+                          label="Nombre del perro"
                           required
+                          :rules="inputRules"
                         ></v-text-field>
                       </v-form>
                     </div>
                   </v-scroll-x-transition>
-                  <!-- <v-slide-y-transition hide-on-leave>
-                    <v-btn v-show="expand" depressed  outline >Click Me</v-btn>
-                  </v-slide-y-transition>-->
                 </v-flex>
                 <v-flex xs4 sm2>
                   <v-btn
@@ -67,11 +63,8 @@
                     </v-fade-transition>
                   </v-btn>
                 </v-flex>
-                <v-flex xs9 sm9 align-center>
-                  <v-slide-y-transition hide-on-leave>
-                    <v-btn v-show="expand" block outline :color="`${card.color}`">Iniciar Busqueda</v-btn>
-                  </v-slide-y-transition>
-                </v-flex>
+
+                <span>Tenemos: {{updatedInput}}</span>
               </template>
             </v-layout>
           </v-card>
@@ -120,8 +113,19 @@ export default {
           route: ""
         }
       ],
-      searchInput: ""
+      searchInput: "",
+      inputRules: [v => v.length >= 3 || "Error"]
     };
+  },
+  methods: {
+    storeInput() {
+      this.$store.commit("storeInput", this.searchInput);
+    }
+  },
+  computed: {
+    updatedInput() {
+      return this.$store.getters.updatedInput;
+    }
   }
 };
 </script>
