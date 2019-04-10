@@ -14,13 +14,13 @@
                     <div class="caption grey--text">Nombre</div>
                     {{yard.name}}
                   </div>
-                  <div class="font-weight-bold mt-1">
+                  <!-- <div class="font-weight-bold mt-1">
                     <div class="caption grey--text">Perros:</div>
                     {{yard.dogsInside.length}}
-                  </div>
+                  </div>-->
                 </v-layout>
                 <v-spacer></v-spacer>
-                <v-layout column align-end>
+                <!-- <v-layout column align-end>
                   <div v-for="level in yard.dangerLevel" :key="level.name">
                     <v-scroll-x-transition hide-on-leave>
                       <template v-if="!level.show">
@@ -39,13 +39,15 @@
                       </template>
                     </v-scroll-x-transition>
                   </div>
-                </v-layout>
+                </v-layout>-->
               </v-layout>
             </v-card-title>
             <v-card-action>
-              <v-btn flat color="grey darken-1">
-                <v-icon left>folder</v-icon>Explorar
-              </v-btn>
+              <router-link tag="btn" :to="{ name: 'Perros', params: {yard:yard.id, zone:zone}}">
+                <v-btn flat color="grey darken-1">
+                  <v-icon left>folder</v-icon>Explorar
+                </v-btn>
+              </router-link>
             </v-card-action>
           </v-card>
         </v-flex>
@@ -62,12 +64,27 @@ export default {
   data() {
     return {
       zone: "",
-      yards: ""
+      yards: []
     };
   },
   created() {
     this.zone = this.$route.params.zone;
-    this.yards = this.$route.params.data;
+
+    var reference = db.collection("zones").doc(this.$route.params.zone);
+    db.collection("yards")
+      .where("id_zone", "==", reference)
+      .onSnapshot(res => {
+        const changes = res.docChanges();
+
+        changes.forEach(change => {
+          if (change.type === "added") {
+            this.yards.push({
+              ...change.doc.data(),
+              id: change.doc.id
+            });
+          }
+        });
+      });
   }
 };
 </script>
