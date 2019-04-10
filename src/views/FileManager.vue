@@ -25,46 +25,14 @@
               </template>
               <template v-else>
                 <v-flex xs8 sm5 class="grey--text">
-                  <v-scroll-x-transition hide-on-leave>
-                    <h3 class="ml-3 font-weight-regular text-no-wrap" v-show="!expand">{{card.text}}</h3>
-                  </v-scroll-x-transition>
-
-                  <v-scroll-x-transition hide-on-leave class="pt-2">
-                    <div v-show="expand" style="white-space: nowrap">
-                      <v-form onSubmit="return false;" ref="form">
-                        <v-text-field
-                          class="pt-4 ma-0"
-                          clearable
-                          prepend-icon="search"
-                          :color="`${card.color}`"
-                          v-model="searchInput"
-                          label="Nombre del perro"
-                          required
-                          :rules="inputRules"
-                        ></v-text-field>
-                      </v-form>
-                    </div>
-                  </v-scroll-x-transition>
+                  <h3 class="ml-3 font-weight-regular text-no-wrap">{{card.text}}</h3>
                 </v-flex>
                 <v-flex xs4 sm2>
-                  <v-btn
-                    depressed
-                    fab
-                    outline
-                    large
-                    :color="`${card.color}`"
-                    @click="expand = !expand"
-                  >
-                    <v-fade-transition>
-                      <v-icon v-if="!expand">{{card.icon}}</v-icon>
-                    </v-fade-transition>
-                    <v-fade-transition>
-                      <v-icon v-if="expand">clear</v-icon>
-                    </v-fade-transition>
-                  </v-btn>
+                  <popup/>
                 </v-flex>
-
-                <span>Tenemos: {{updatedInput}}</span>
+                <v-flex xs6 sm6>
+                  <span>Tenemos: {{updatedInput}}</span>
+                </v-flex>
               </template>
             </v-layout>
           </v-card>
@@ -75,10 +43,11 @@
 </template>
 
 <script>
+import popup from "../components/popup";
 export default {
+  components: { popup },
   data() {
     return {
-      expand: false,
       cards: [
         {
           name: "List",
@@ -112,15 +81,8 @@ export default {
           class: "borderAdd",
           route: ""
         }
-      ],
-      searchInput: "",
-      inputRules: [v => v.length >= 3 || "Error"]
+      ]
     };
-  },
-  methods: {
-    storeInput() {
-      this.$store.commit("storeInput", this.searchInput);
-    }
   },
   computed: {
     updatedInput() {

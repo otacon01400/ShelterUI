@@ -1,5 +1,8 @@
 <template>
   <div id="yards">
+    <v-content>
+      <stepper/>
+    </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">
         <v-flex v-for="yard in yards" :key="yard.id">
@@ -16,9 +19,7 @@
                     {{yard.dogsInside.length}}
                   </div>
                 </v-layout>
-
                 <v-spacer></v-spacer>
-
                 <v-layout column align-end>
                   <div v-for="level in yard.dangerLevel" :key="level.name">
                     <v-scroll-x-transition hide-on-leave>
@@ -53,7 +54,11 @@
   </div>
 </template>
 <script>
+import stepper from "../components/stepper";
+import db from "@/fb";
+
 export default {
+  components: { stepper },
   data() {
     return {
       zone: "",
