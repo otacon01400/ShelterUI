@@ -1,7 +1,7 @@
 <template>
   <div id="dogs">
     <v-content>
-      <stepper/>
+      <stepper currentView="Perros"/>
     </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">
@@ -49,16 +49,20 @@
             </v-card-action>
           </v-card>
         </v-flex>
+        <v-flex align-self-end>
+          <fileCreator :reference="yard"/>
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 <script>
 import stepper from "../components/stepper";
+import fileCreator from "../components/fileCreator";
 import db from "@/fb";
 
 export default {
-  components: { stepper },
+  components: { stepper, fileCreator },
   data() {
     return {
       yard: "",
@@ -73,7 +77,6 @@ export default {
       .where("id_yard", "==", reference)
       .onSnapshot(res => {
         const changes = res.docChanges();
-
         changes.forEach(change => {
           if (change.type === "added") {
             this.dogs.push({
