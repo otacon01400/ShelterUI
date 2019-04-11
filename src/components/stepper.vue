@@ -54,7 +54,7 @@ export default {
       let btnArray = arrayDefault.map(button => {
         if (button.order <= this.currentView) {
           button.disabled = false;
-          if (button.order == this.currentView) button.stateColor = "cyan";
+          if (button.order == this.currentView) button.stateColor = "orange";
         }
         // if(button.order == '1' && this.currentView == '2') button.route =
         return button;
