@@ -5,11 +5,11 @@
         small
         block
         flat
-        color="orange"
-        :active-class="active"
+        :color="button.stateColor"
+        :active-class="button.active"
         :disabled="button.disabled"
         router
-        :to="'/zones'"
+        :to="button.route"
       >{{button.text}}</v-btn>
     </v-flex>
   </v-toolbar>
@@ -27,27 +27,36 @@ export default {
       let arrayDefault = [
         {
           text: "Zonas",
-          disabled: false,
-          active: ""
+          disabled: true,
+          active: "",
+          order: "1",
+          stateColor: "black",
+          route: ""
         },
         {
           text: "Patios",
           disabled: true,
-          active: ""
+          active: "",
+          order: "2",
+          stateColor: "black",
+          route: ""
         },
         {
           text: "Perros",
           disabled: true,
-          active: ""
+          active: "",
+          order: "3",
+          stateColor: "black",
+          route: ""
         }
       ];
-      console.log(this.currentView);
+
       let btnArray = arrayDefault.map(button => {
-        console.log(button.text);
-        if (this.currentView == button.text) {
+        if (button.order <= this.currentView) {
           button.disabled = false;
-          button.active = "true";
+          if (button.order == this.currentView) button.stateColor = "cyan";
         }
+        // if(button.order == '1' && this.currentView == '2') button.route =
         return button;
       });
 

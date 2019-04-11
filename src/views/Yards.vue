@@ -1,7 +1,7 @@
 <template>
   <div id="yards">
     <v-content>
-      <stepper currentView="Patios"/>
+      <stepper currentView="2"/>
     </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">
@@ -43,7 +43,10 @@
               </v-layout>
             </v-card-title>
             <v-card-action>
-              <router-link tag="btn" :to="{ name: 'Perros', params: {yard:yard.id, zone:zone}}">
+              <router-link
+                tag="btn"
+                :to="{ name: 'Perros', params: {yard:yard.id, yardName:yard.name}}"
+              >
                 <v-btn flat color="grey darken-1">
                   <v-icon left>folder</v-icon>Explorar
                 </v-btn>

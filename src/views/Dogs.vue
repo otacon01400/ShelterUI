@@ -1,7 +1,7 @@
 <template>
   <div id="dogs">
     <v-content>
-      <stepper currentView="Perros"/>
+      <stepper currentView="3"/>
     </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">

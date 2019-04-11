@@ -29,12 +29,12 @@ export default new Router({
 			component: Zones
 		},
 		{
-			path: '/zones/:zone',
+			path: '/zones/:zoneName/:zone',
 			name: 'Patios',
 			component: Yards
 		},
 		{
-			path: '/zones/:zone/:yard',
+			path: '/zones/:zoneName/:zone/:yardName/:yard',
 			name: 'Perros',
 			component: Dogs
 		},

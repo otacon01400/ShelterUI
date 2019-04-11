@@ -1,11 +1,11 @@
 <template>
   <div class="zones">
     <v-content>
-      <stepper currentView="Zonas"/>
+      <stepper currentView="1"/>
     </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">
-        <v-flex v-for="zone in zonesWithYards" :key="zone.id">
+        <v-flex v-for="zone in zonesRaw" :key="zone.id">
           <v-card class="mx-2 my-2">
             <v-card-title>
               <v-layout row wrap>
@@ -43,7 +43,10 @@
               </v-layout>
             </v-card-title>
             <v-card-action>
-              <router-link tag="btn" :to="{ name: 'Patios', params: {zone:zone.id}}">
+              <router-link
+                tag="btn"
+                :to="{ name: 'Patios', params: {zone:zone.id, zoneName:zone.name}}"
+              >
                 <v-btn flat color="grey darken-1">
                   <v-icon left>folder</v-icon>Explorar
                 </v-btn>
@@ -97,23 +100,20 @@ export default {
       zonesRaw: []
     };
   },
-  asyncComputed: {
-    async zonesWithYards() {
-      let newZones = this.zonesRaw.map(zone => {
-        let reference = db.collection("zones").doc(zone.id);
-
+  methods: {
+    getNumer: function() {
+      return this.$data.zonesRaw.map(element => {
+        let reference = db.collection("zones").doc(element.id);
         db.collection("yards")
-
           .where("id_zone", "==", reference)
           .get()
           .then(snap => {
-            zone.yardsInside = snap.size; // will return the collection size
+            element.yardsInside = snap.size; // will return the collection size
           });
-        return zone;
       });
-      return await newZones;
     }
   },
+  computed: {},
   created() {
     db.collection("zones").onSnapshot(res => {
       const changes = res.docChanges();
@@ -123,6 +123,7 @@ export default {
             ...change.doc.data(),
             id: change.doc.id
           });
+          this.getNumer();
         }
       });
     });
