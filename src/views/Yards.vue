@@ -14,10 +14,10 @@
                     <div class="caption grey--text">Nombre</div>
                     {{yard.name}}
                   </div>
-                  <!-- <div class="font-weight-bold mt-1">
+                  <div class="font-weight-bold mt-1">
                     <div class="caption grey--text">Perros:</div>
-                    {{yard.dogsInside.length}}
-                  </div>-->
+                    {{yard.dogsInside}}
+                  </div>
                 </v-layout>
                 <v-spacer></v-spacer>
                 <!-- <v-layout column align-end>

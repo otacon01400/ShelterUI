@@ -5,7 +5,7 @@
     </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">
-        <v-flex v-for="zone in zonesRaw" :key="zone.id">
+        <v-flex v-for="zone in updatedZones" :key="zone.id">
           <v-card class="mx-2 my-2">
             <v-card-title>
               <v-layout row wrap>
@@ -108,12 +108,23 @@ export default {
           .where("id_zone", "==", reference)
           .get()
           .then(snap => {
-            element.yardsInside = snap.size; // will return the collection size
+            if (element.yardsInside != snap.size) {
+              element.yardsInside = snap.size;
+              db.collection("zones")
+                .doc(element.id)
+                .update({
+                  yardsInside: snap.size
+                });
+            }
           });
       });
     }
   },
-  computed: {},
+  computed: {
+    updatedZones: function() {
+      return this.zonesRaw;
+    }
+  },
   created() {
     db.collection("zones").onSnapshot(res => {
       const changes = res.docChanges();
@@ -123,6 +134,14 @@ export default {
             ...change.doc.data(),
             id: change.doc.id
           });
+        }
+      });
+      this.getNumer();
+    });
+    db.collection("yards").onSnapshot(res => {
+      let changes = res.docChanges();
+      changes.forEach(change => {
+        if (change.type === "added" || change.type === "removed") {
           this.getNumer();
         }
       });

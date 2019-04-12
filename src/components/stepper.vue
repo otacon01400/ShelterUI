@@ -1,16 +1,25 @@
 <template>
   <v-toolbar dense app class="mt-5" flat>
     <v-flex v-for="button in buttons" :key="button.name">
-      <v-btn
-        small
-        block
-        flat
-        :color="button.stateColor"
-        :active-class="button.active"
-        :disabled="button.disabled"
-        router
-        :to="button.route"
-      >{{button.text}}</v-btn>
+      <div v-if="button.historyLevel == 0">
+        <v-btn
+          small
+          block
+          flat
+          :color="button.stateColor"
+          :disabled="button.disabled"
+        >{{button.text}}</v-btn>
+      </div>
+      <div v-else>
+        <v-btn
+          small
+          block
+          flat
+          :color="button.stateColor"
+          :disabled="button.disabled"
+          @click="$router.go(button.historyLevel)"
+        >{{button.text}}</v-btn>
+      </div>
     </v-flex>
   </v-toolbar>
 </template>
@@ -20,43 +29,42 @@ export default {
     currentView: String
   },
   data() {
-    return {};
-  },
-  computed: {
-    buttons() {
-      let arrayDefault = [
+    return {
+      defaultButtons: [
         {
           text: "Zonas",
           disabled: true,
-          active: "",
+          historyLevel: 0,
           order: "1",
-          stateColor: "black",
-          route: ""
+          stateColor: ""
         },
         {
           text: "Patios",
           disabled: true,
-          active: "",
+          historyLevel: 0,
           order: "2",
-          stateColor: "black",
-          route: ""
+          stateColor: ""
         },
         {
           text: "Perros",
           disabled: true,
-          active: "",
+          historyLevel: 0,
           order: "3",
-          stateColor: "black",
-          route: ""
+          stateColor: ""
         }
-      ];
-
-      let btnArray = arrayDefault.map(button => {
+      ]
+    };
+  },
+  computed: {
+    buttons() {
+      let historyCalculator;
+      let btnArray = this.defaultButtons.map(button => {
         if (button.order <= this.currentView) {
           button.disabled = false;
           if (button.order == this.currentView) button.stateColor = "orange";
         }
-        // if(button.order == '1' && this.currentView == '2') button.route =
+        historyCalculator = this.currentView - button.order;
+        if (historyCalculator > 0) button.historyLevel = -historyCalculator;
         return button;
       });
 
@@ -66,9 +74,6 @@ export default {
 };
 </script>
 <style>
-.activeBtn {
-  color: cornflowerblue;
-}
 </style>
 
 
