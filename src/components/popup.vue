@@ -50,6 +50,7 @@ export default {
         this.$store.commit("storeInput", this.searchInput);
         this.dialog = false;
       }
+      this.searchInput = null;
     }
   }
 };

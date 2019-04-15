@@ -5,7 +5,7 @@
     </v-content>
     <v-container class="my-5" fill-height>
       <v-layout column class="pt-2">
-        <v-flex v-for="yard in yards" :key="yard.id">
+        <v-flex v-for="yard in updatedYards" :key="yard.id">
           <v-card class="mx-2 my-2">
             <v-card-title>
               <v-layout row wrap>
@@ -67,9 +67,35 @@ export default {
   data() {
     return {
       zone: "",
-      yards: []
+      yardsRaw: []
     };
   },
+  methods: {
+    getNumer: function() {
+      return this.$data.yardsRaw.map(element => {
+        let reference = db.collection("yards").doc(element.id);
+        db.collection("dogs")
+          .where("id_yard", "==", reference)
+          .get()
+          .then(snap => {
+            if (element.dogsInside != snap.size) {
+              element.dogsInside = snap.size;
+              db.collection("yards")
+                .doc(element.id)
+                .update({
+                  dogsInside: snap.size
+                });
+            }
+          });
+      });
+    }
+  },
+  computed: {
+    updatedYards: function() {
+      return this.yardsRaw;
+    }
+  },
+
   created() {
     this.zone = this.$route.params.zone;
 
@@ -81,13 +107,22 @@ export default {
 
         changes.forEach(change => {
           if (change.type === "added") {
-            this.yards.push({
+            this.yardsRaw.push({
               ...change.doc.data(),
               id: change.doc.id
             });
           }
         });
+        this.getNumer();
       });
+    db.collection("dogs").onSnapshot(res => {
+      let changes = res.docChanges();
+      changes.forEach(change => {
+        if (change.type === "added" || change.type === "removed") {
+          this.getNumer();
+        }
+      });
+    });
   }
 };
 </script>
