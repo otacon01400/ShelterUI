@@ -30,9 +30,6 @@
                 <v-flex xs4 sm2>
                   <popup/>
                 </v-flex>
-                <v-flex xs6 sm6>
-                  <span>Tenemos: {{updatedInput}}</span>
-                </v-flex>
               </template>
             </v-layout>
           </v-card>

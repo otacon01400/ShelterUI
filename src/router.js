@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import FileManager from './views/FileManager.vue';
+import SearchResults from './views/SearchResults.vue';
 import Zones from './views/Zones.vue';
 import Yards from './views/Yards.vue';
 import Dogs from './views/Dogs.vue';
@@ -24,17 +25,22 @@ export default new Router({
 			component: FileManager
 		},
 		{
+			path: '/searchResults',
+			name: 'Resultados',
+			component: SearchResults
+		},
+		{
 			path: '/zones',
 			name: 'Zonas',
 			component: Zones
 		},
 		{
-			path: '/zones/:zone',
+			path: '/zones/:zoneName/:zone',
 			name: 'Patios',
 			component: Yards
 		},
 		{
-			path: '/zones/:zone/:yard',
+			path: '/zones/:zoneName/:zone/:yardName/:yard',
 			name: 'Perros',
 			component: Dogs
 		},
