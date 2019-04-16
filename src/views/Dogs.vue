@@ -1,26 +1,21 @@
 <template>
-  <div id="dogs">
-    <v-content>
-      <stepper currentView="3"/>
-    </v-content>
-    <v-container class="my-5" fill-height>
-      <v-layout column class="pt-2">
-        <v-flex v-for="dog in dogs" :key="dog.id">
-          <v-card class="mx-2 my-2">
-            <v-card-title>
-              <v-layout row wrap>
-                <v-layout column>
-                  <div class="font-weight-bold mb-1">
-                    <div class="caption grey--text">Nombre</div>
-                    {{dog.name}}
-                  </div>
-                  <!-- <div class="font-weight-bold mt-1">
-                    <div class="caption grey--text">Perros:</div>
-                    {{yard.dogsInside.length}}
-                  </div>-->
-                </v-layout>
-                <v-spacer></v-spacer>
-                <!-- <v-layout column align-end>
+  <v-content>
+    <stepper currentView="3"/>
+    <v-container class="my-5">
+      <v-layout align-center justify-space-around fill-height>
+        <v-layout column>
+          <v-flex v-for="dog in dogs" :key="dog.id" class="my-2" xs12 sm12>
+            <v-card class="mx-2 my-2">
+              <v-card-title>
+                <v-layout row wrap>
+                  <v-layout column>
+                    <div class="font-weight-bold mb-1">
+                      <div class="caption grey--text">Nombre</div>
+                      {{dog.name}}
+                    </div>
+                  </v-layout>
+                  <v-spacer></v-spacer>
+                  <!-- <v-layout column align-end>
                   <div v-for="level in yard.dangerLevel" :key="level.name">
                     <v-scroll-x-transition hide-on-leave>
                       <template v-if="!level.show">
@@ -39,23 +34,25 @@
                       </template>
                     </v-scroll-x-transition>
                   </div>
-                </v-layout>-->
-              </v-layout>
-            </v-card-title>
-            <v-card-action>
-              <v-btn flat color="grey darken-1">
-                <v-icon left>folder</v-icon>Explorar
-              </v-btn>
-            </v-card-action>
-          </v-card>
-        </v-flex>
-        <v-flex align-self-end>
-          <fileCreator :reference="yard"/>
-        </v-flex>
+                  </v-layout>-->
+                </v-layout>
+              </v-card-title>
+              <v-card-action>
+                <v-btn flat color="grey darken-1">
+                  <v-icon left>chrome_reader_mode</v-icon>Ver Ficha
+                </v-btn>
+              </v-card-action>
+            </v-card>
+          </v-flex>
+          <v-flex align-self-end>
+            <fileCreator :reference="yard"/>
+          </v-flex>
+        </v-layout>
       </v-layout>
     </v-container>
-  </div>
+  </v-content>
 </template>
+
 <script>
 import stepper from "../components/stepper";
 import fileCreator from "../components/fileCreator";

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import FileManager from './views/FileManager.vue';
+import SearchResults from './views/SearchResults.vue';
 import Zones from './views/Zones.vue';
 import Yards from './views/Yards.vue';
 import Dogs from './views/Dogs.vue';
@@ -22,6 +23,11 @@ export default new Router({
 			path: '/fileManager',
 			name: 'Gestor de Fichas',
 			component: FileManager
+		},
+		{
+			path: '/searchResults',
+			name: 'Resultados',
+			component: SearchResults
 		},
 		{
 			path: '/zones',

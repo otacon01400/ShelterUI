@@ -1,14 +1,12 @@
 <template>
-  <div id="yards">
-    <v-content>
-      <stepper currentView="2"/>
-    </v-content>
-    <v-container class="my-5" fill-height>
-      <v-layout column class="pt-2">
-        <v-flex v-for="yard in updatedYards" :key="yard.id">
-          <v-card class="mx-2 my-2">
-            <v-card-title>
-              <v-layout row wrap>
+  <v-content>
+    <stepper currentView="2"/>
+    <v-container class="my-5">
+      <v-layout align-center justify-space-around fill-height>
+        <v-layout column>
+          <v-flex v-for="yard in updatedYards" :key="yard.id" class="my-2" xs12 sm12>
+            <v-card>
+              <v-card-title>
                 <v-layout column>
                   <div class="font-weight-bold mb-1">
                     <div class="caption grey--text">Nombre</div>
@@ -19,44 +17,23 @@
                     {{yard.dogsInside}}
                   </div>
                 </v-layout>
-                <v-spacer></v-spacer>
-                <!-- <v-layout column align-end>
-                  <div v-for="level in yard.dangerLevel" :key="level.name">
-                    <v-scroll-x-transition hide-on-leave>
-                      <template v-if="!level.show">
-                        <v-chip :class="`white--text caption ${level.color}`">
-                          <div>Peligro: {{level.name}}</div>
-                          <v-icon right @click="level.show = true">info</v-icon>
-                        </v-chip>
-                      </template>
-                    </v-scroll-x-transition>
-                    <v-scroll-x-transition hide-on-leave>
-                      <template v-if="level.show">
-                        <v-chip :class="`white--text caption ${level.color}`">
-                          <div>{{level.voluntareerLevel}}</div>
-                          <v-icon right @click="level.show = false">close</v-icon>
-                        </v-chip>
-                      </template>
-                    </v-scroll-x-transition>
-                  </div>
-                </v-layout>-->
-              </v-layout>
-            </v-card-title>
-            <v-card-action>
-              <router-link
-                tag="btn"
-                :to="{ name: 'Perros', params: {yard:yard.id, yardName:yard.name}}"
-              >
-                <v-btn flat color="grey darken-1">
-                  <v-icon left>folder</v-icon>Explorar
-                </v-btn>
-              </router-link>
-            </v-card-action>
-          </v-card>
-        </v-flex>
+              </v-card-title>
+              <v-card-action>
+                <router-link
+                  tag="btn"
+                  :to="{ name: 'Perros', params: {yard:yard.id, yardName:yard.name}}"
+                >
+                  <v-btn flat color="grey darken-1">
+                    <v-icon left>folder</v-icon>Explorar
+                  </v-btn>
+                </router-link>
+              </v-card-action>
+            </v-card>
+          </v-flex>
+        </v-layout>
       </v-layout>
     </v-container>
-  </div>
+  </v-content>
 </template>
 <script>
 import stepper from "../components/stepper";

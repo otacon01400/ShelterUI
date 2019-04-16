@@ -24,6 +24,7 @@
       <v-spacer></v-spacer>
       <v-card-action>
         <v-btn outline color="orange" @click="storeInput">Iniciar Busqueda</v-btn>
+        <!-- route to="/searchResults" -->
       </v-card-action>
     </v-card>
   </v-dialog>
@@ -48,6 +49,8 @@ export default {
     storeInput() {
       if (this.$refs.form.validate()) {
         this.$store.commit("storeInput", this.searchInput);
+        this.searchInput = null;
+        this.$router.push({ name: "Resultados" });
         this.dialog = false;
       }
       this.searchInput = null;
