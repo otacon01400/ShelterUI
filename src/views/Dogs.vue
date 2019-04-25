@@ -10,7 +10,7 @@
                 <v-layout row wrap>
                   <v-layout column>
                     <div class="font-weight-bold mb-1">
-                      <div class="caption grey--text">Nombre</div>
+                      <div class="caption grey--text"></div>
                       {{dog.name}}
                     </div>
                   </v-layout>
@@ -38,14 +38,12 @@
                 </v-layout>
               </v-card-title>
               <v-card-action>
-                <v-btn flat color="grey darken-1">
-                  <v-icon left>chrome_reader_mode</v-icon>Ver Ficha
-                </v-btn>
+                <fileEditor button="view" :reference="yard" :title="dog.name" :dogID="dog.id"/>
               </v-card-action>
             </v-card>
           </v-flex>
           <v-flex align-self-end>
-            <fileCreator :reference="yard"/>
+            <fileEditor button="create" :reference="yard" title="Añadir nueva ficha"/>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -55,16 +53,21 @@
 
 <script>
 import stepper from "../components/stepper";
-import fileCreator from "../components/fileCreator";
+import fileEditor from "../components/fileEditor";
 import db from "@/fb";
 
 export default {
-  components: { stepper, fileCreator },
+  components: { stepper, fileEditor },
   data() {
     return {
       yard: "",
       dogs: []
     };
+  },
+  methods: {
+    sortBy(prop) {
+      this.yardsRaw.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
+    }
   },
   created() {
     this.yard = this.$route.params.yard;
@@ -82,9 +85,12 @@ export default {
             });
           }
         });
+        this.sortBy("name");
       });
   }
 };
 </script>
 <style>
 </style>
+
+<!--v-bind:editable="true"-->

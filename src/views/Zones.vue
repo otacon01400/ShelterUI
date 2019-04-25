@@ -118,6 +118,9 @@ export default {
             }
           });
       });
+    },
+    sortBy(prop) {
+      this.zonesRaw.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     }
   },
   computed: {
@@ -137,6 +140,7 @@ export default {
         }
       });
       this.getNumer();
+      this.sortBy("order");
     });
     db.collection("yards").onSnapshot(res => {
       let changes = res.docChanges();

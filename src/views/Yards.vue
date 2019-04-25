@@ -65,6 +65,9 @@ export default {
             }
           });
       });
+    },
+    sortBy(prop) {
+      this.yardsRaw.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     }
   },
   computed: {
@@ -91,6 +94,7 @@ export default {
           }
         });
         this.getNumer();
+        this.sortBy("name");
       });
     db.collection("dogs").onSnapshot(res => {
       let changes = res.docChanges();
