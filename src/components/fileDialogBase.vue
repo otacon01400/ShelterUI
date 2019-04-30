@@ -12,25 +12,25 @@
           <span right>Ver Ficha</span>
         </v-btn>
       </template>
-      <dogFormBase :reference="reference" @close="dialog = false"/>
+      <dialogForm :reference="reference" @close="dialog = false"/>
     </template>
     <template v-if="button == 'view'">
       <v-btn slot="activator" flat color="grey darken-1">
         <v-icon left>chrome_reader_mode</v-icon>
         <span right>Ver Ficha</span>
       </v-btn>
-      <dogFile :dogData="dogData" @changeToEdit="button = 'create'"/>
+      <dialogDataSheet :dogData="dogData" @changeToEdit="button = 'create'"/>
     </template>
   </v-dialog>
 </template>
 <script>
 import db from "@/fb.js";
 import dateFormat from "@/Date.format.min.js";
-import dogFormBase from "@/components/dogFormBase";
-import dogFile from "@/components/dogFile";
+import dialogForm from "@/components/dialogForm";
+import dialogDataSheet from "@/components/dialogDataSheet";
 
 export default {
-  components: { dogFormBase, dogFile },
+  components: { dialogForm, dialogDataSheet },
   props: {
     reference: String,
     editable: Boolean,

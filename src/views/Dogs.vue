@@ -38,12 +38,12 @@
                 </v-layout>
               </v-card-title>
               <v-card-action>
-                <fileEditor button="view" :reference="yard" :title="dog.name" :dogID="dog.id"/>
+                <fileDialogBase button="view" :reference="yard" :title="dog.name" :dogID="dog.id"/>
               </v-card-action>
             </v-card>
           </v-flex>
           <v-flex align-self-end>
-            <fileEditor button="create" :reference="yard" title="Añadir nueva ficha"/>
+            <fileDialogBase button="create" :reference="yard" title="Añadir nueva ficha"/>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -53,11 +53,11 @@
 
 <script>
 import stepper from "../components/stepper";
-import fileEditor from "../components/fileEditor";
+import fileDialogBase from "../components/fileDialogBase";
 import db from "@/fb";
 
 export default {
-  components: { stepper, fileEditor },
+  components: { stepper, fileDialogBase },
   data() {
     return {
       yard: "",
