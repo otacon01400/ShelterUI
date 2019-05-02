@@ -15,6 +15,7 @@
       <v-toolbar-side-icon @click="changeState">
         <v-icon>edit</v-icon>
       </v-toolbar-side-icon>
+      <eraser/>
     </v-toolbar>
     <!-- <v-list three-line expand> -->
     <!-- <v-list-tile>
@@ -197,7 +198,10 @@
 </template>
 
 <script>
+import eraser from "@/components/dataSheetEraser";
+
 export default {
+  components: { eraser },
   props: {
     dogData: Object
   },
