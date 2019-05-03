@@ -4,7 +4,7 @@
     <v-container class="my-5">
       <v-layout align-center justify-space-around fill-height>
         <v-layout column>
-          <v-flex v-for="dog in dogs" :key="dog.id" class="my-2" xs12 sm12>
+          <v-flex v-for="dog in reactiveDogs" :key="dog.id" class="my-2" xs12 sm12>
             <v-card class="mx-2 my-2">
               <v-card-title>
                 <v-layout row wrap>
@@ -83,10 +83,19 @@ export default {
               ...change.doc.data(),
               id: change.doc.id
             });
+          } else if (change.type === "removed") {
+            console.log("'removed' change detected, erased id:", change.doc.id);
+            this.dogs = this.dogs.filter(dog => dog.id != change.doc.id);
+            console.log(this.dogs);
           }
         });
         this.sortBy("name");
       });
+  },
+  computed: {
+    reactiveDogs: function() {
+      return this.dogs;
+    }
   }
 };
 </script>

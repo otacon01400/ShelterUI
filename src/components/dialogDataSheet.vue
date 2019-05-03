@@ -15,7 +15,7 @@
       <v-toolbar-side-icon @click="changeState">
         <v-icon>edit</v-icon>
       </v-toolbar-side-icon>
-      <eraser/>
+      <eraser @eraseData="remove"/>
     </v-toolbar>
     <!-- <v-list three-line expand> -->
     <!-- <v-list-tile>
@@ -199,6 +199,7 @@
 
 <script>
 import eraser from "@/components/dataSheetEraser";
+import db from "@/fb.js";
 
 export default {
   components: { eraser },
@@ -208,6 +209,13 @@ export default {
   methods: {
     changeState() {
       this.$emit("changeToEdit");
+    },
+    remove() {
+      console.log("eventDetected");
+      console.log(this.dogData.id);
+      db.collection("dogs")
+        .doc(this.dogData.id)
+        .delete();
     }
   }
 };
